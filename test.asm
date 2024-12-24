@@ -23,10 +23,13 @@ Start:
     fadd    st(1),st(0); s0 = c, s1 = 6ab + c, s2 = b
     jz      Exit
     fxch    st(2) ; s0 = b, s1 = 6ab + c, s2 = c
-    fmul    plus28 ; s0 = 28b, s1 = 6ab + c, s2 = c
-    fadd    st(0),st(2); s0 = 28b + c, s1 = 6ab + c, s2 = c
-    fsub    minus19; s0 = 28b + c - 19, s1 = 6ab + c, s2 = c
-    fdiv    st(0),st(1); s0 = s0/s1, s1 = 6ab + c, s2 = c
+    fld     st(0) ; s0 = b, s1 = b, s2 = 6ab + c, s3 = c
+    fmul    st(0),st(1); s0 = b^2, s1 = b, s2 = 6ab + c, s3 = c
+    fmul    st(0),st(1); s0 = b^3, s1 = b, s2 = 6ab + c, s3 = c
+    fmul    plus28 ; s0 = 28b^3, s1 = b, s2 = 6ab + c, s3 = c
+    fadd    st(0),st(3); s0 = 28b^3 + c, s1 = b, s2 = 6ab + c, s3 = c
+    fsub    minus19; s0 = 28b^3 + c - 19, s1 = b, s2 = 6ab + c, s3 = c
+    fdiv    st(0),st(2); s0 = 28b^3 + c - 19, s1 = b, s2 = 6ab + c, s3 = c
     fist    D ; D = result
 Exit:
     mov     ah,04ch
