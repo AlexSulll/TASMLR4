@@ -2,9 +2,9 @@
 .386
 .stack      100h
 .data
-    A           dd      ?
-    B           dd      ?
-    C           dd      ?
+    A           dd      +52.0
+    B           dd      -52.0
+    C           dd      +52.0
     D           dd      ?
     six         dd      +6.0
     minus19     dd      -19.0
@@ -15,23 +15,19 @@ Start:
     mov     ds,ax
     mov     es,ax
     fld     A
-    fld     B
-    fmul    st(1),st
-    fxch    st(1)
+    fmul    B
     fmul    six
-    fld     C
-    fadd    st(1),st
+    fadd    C
     jz      Exit
-    fxch    st(2)
-    fld     st
-    fmul    st,st(1)
-    fmul    st,st(1)
+    fld     B
+    fmul    B
+    fmul    B
     fmul    plus28
-    fadd    st,st(3)
+    fadd    C
     fsub    minus19
-    fdiv    st,st(2)
+    fdiv    st,st(1)
     fist    D
 Exit:
-    mov     ah,04ch
+    mov     ah,4Ch
     int     21h
     end     Start 
