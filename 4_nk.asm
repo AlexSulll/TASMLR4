@@ -32,6 +32,6 @@ Start:
     fdiv    st,st(2)
     fist    D
 Exit:
-    mov     ah,04ch
+    mov     ah,4Ch
     int     21h
     end     Start 
